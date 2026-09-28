@@ -208,7 +208,12 @@
   .coev-pick{margin:.6rem 0; font-size:.85rem;}
   .coev-pick select{min-width:240px;}
   #printHeader{display:none;}
-  @media print{ #printHeader{display:block; position:fixed; top:0; left:0; right:0; font-size:11px; border-bottom:1px solid #999; padding:2px 0; text-align:center; background:#fff;} body{padding-top:20px;} .login-box,.gate-note,.send-row{display:none !important;} }
+  .nivel-done{margin-top:.8rem; padding:.5rem .8rem; background:#F0F7F4; border:1.5px dashed var(--teal-dark); border-radius:10px; display:flex; gap:.7rem; align-items:center; flex-wrap:wrap; font-size:.85rem; font-weight:600; color:var(--teal-dark);}
+  .nivel-done label{cursor:pointer; display:flex; align-items:center; gap:.4rem;}
+  .nivel-done input{width:1.15rem; height:1.15rem; accent-color:var(--teal-dark);}
+  .eq-upload-block{background:#FBF6EA; border:1.5px dashed var(--line); border-radius:12px; padding:.7rem .9rem; margin-top:.7rem;}
+  .equipo-box .upload-row input[type=url]{flex:1; min-width:220px; font:inherit; font-size:.85rem; padding:.4rem .5rem; border:1.5px solid var(--line); border-radius:8px;}
+  @media print{ .nivel-done,.equipo-box,#teamBox{display:none !important;} #printHeader{display:block; position:fixed; top:0; left:0; right:0; font-size:11px; border-bottom:1px solid #999; padding:2px 0; text-align:center; background:#fff;} body{padding-top:20px;} .login-box,.gate-note,.send-row{display:none !important;} }
 
   .entrega-box{background:#fff; border:2px solid var(--teal-dark); border-radius:14px; padding:1rem 1.1rem; margin:.8rem 0;}
   .entrega-box h4{color:var(--teal-dark); margin:0 0 .4rem 0; font-size:1rem;}
@@ -318,6 +323,23 @@
         </div>
         <div id="loginMsg" class="send-status"></div>
         <p class="note-informativa">Tu maestra te da tu PIN. Si usas el dispositivo de tu equipo, al terminar toca "Cerrar sesión" para que entre tu compañero(a).</p>
+      </div>
+      <div class="login-box" id="teamBox">
+        <h3>👥 Acceso del equipo (temas 2.1 a 2.3 y cierre)</h3>
+        <div id="teamLogin">
+          <div class="login-row">
+            <label>Grupo<input id="teamGrupo" placeholder="Ej. 5F" autocomplete="off"></label>
+            <label>N.º de equipo<input id="teamNum" inputmode="numeric" placeholder="Ej. 3" autocomplete="off"></label>
+            <label>PIN de equipo<input id="teamPin" type="password" inputmode="numeric" placeholder="4 dígitos" autocomplete="off"></label>
+            <button type="button" id="btnTeamLogin">Entrar</button>
+          </div>
+          <div id="teamMsg" class="send-status"></div>
+        </div>
+        <div id="teamInfo" style="display:none;">
+          <p id="teamText" style="margin:.2rem 0 .6rem 0; font-size:.88rem;"></p>
+          <button type="button" id="btnTeamLogout" class="send-btn">Cerrar sesión del equipo</button>
+        </div>
+        <p class="note-informativa">Tu maestra da el PIN del equipo. Con él se registra el avance por nivel y se suben las evidencias del equipo. Es distinto al PIN personal.</p>
       </div>
       <div class="logo-strip">
         <div class="logo-slot" style="background:#fff;"><img src="data:image/png;base64,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" alt="Logo DGETI" style="max-width:100%;max-height:100%;object-fit:contain;"></div>
@@ -1056,6 +1078,16 @@
     })();
     var sesion = (function(){ try{ return JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null'); }catch(e){ return null; } })();
 
+    var EQ_SESSION_KEY = 'progresion2_equipo';
+    var EQ_LOCAL_KEY = 'progresion2_equipo_local';
+    var equipo = (function(){ try{ return JSON.parse(sessionStorage.getItem(EQ_SESSION_KEY) || 'null'); }catch(e){ return null; } })();
+    var eqLocal = (function(){
+      try{ var d = JSON.parse(localStorage.getItem(EQ_LOCAL_KEY) || 'null'); if(d && d.quiz){ d.owner = d.owner || ''; return d; } }catch(e){}
+      return {owner:'', quiz:{}};
+    })();
+    function saveEqLocal(){ try{ localStorage.setItem(EQ_LOCAL_KEY, JSON.stringify(eqLocal)); }catch(e){} }
+    function saveEquipo(){ try{ sessionStorage.setItem(EQ_SESSION_KEY, JSON.stringify(equipo)); }catch(e){} }
+    function conCredEq(p){ return Object.assign({}, equipo ? {grupo:equipo.grupo, equipo:equipo.equipo, pin:equipo.pin} : {}, p); }
     function saveData(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }catch(e){} }
     function saveSesion(){ try{ sessionStorage.setItem(SESSION_KEY, JSON.stringify(sesion)); }catch(e){} }
     function setStatus(msg){ var el=$('saveStatusText'); if(el) el.textContent = msg; }
@@ -1127,7 +1159,13 @@
       });
     }
     window.__onQuizAnswer = function(cid, qi, q, oi){
-      if(cid !== 'quiz') return;
+      if(cid !== 'quiz'){
+        var m = eqLocal.quiz[cid] = eqLocal.quiz[cid] || {};
+        if(!m[qi]) m[qi] = {ok:(oi === q.correct), intentos:0};
+        m[qi].intentos++;
+        saveEqLocal();
+        return;
+      }
       var d = data.diag[qi];
       if(!d){ d = data.diag[qi] = {n:qi+1, pregunta:q.stem, correcta:q.opts[q.correct], respuesta:q.opts[oi], acierto1:(oi === q.correct), intentos:0}; }
       d.intentos++;
@@ -1237,11 +1275,170 @@
     });
     window.addEventListener('afterprint', function(){ document.title = tituloOriginal; });
 
+    /* ================= EQUIPO: temas 2.1–2.3 y cierre ================= */
+    function renderEquipo(){
+      var on = !!equipo;
+      $('teamLogin').style.display = on ? 'none' : 'block';
+      $('teamInfo').style.display = on ? 'block' : 'none';
+      if(on){
+        $('teamText').textContent = 'Equipo ' + equipo.equipo + ' · Grupo ' + equipo.grupo +
+          (equipo.lider ? ' · Líder: ' + equipo.lider : '') +
+          (equipo.integrantes && equipo.integrantes.length ? ' · Integrantes: ' + equipo.integrantes.join(', ') : '');
+      }
+      document.querySelectorAll('[data-gate-team]').forEach(function(g){ g.style.display = on ? 'none' : 'block'; });
+      document.querySelectorAll('.lvl-check').forEach(function(c){
+        var av = on && equipo.avance ? equipo.avance[c.getAttribute('data-subtema')] : null;
+        c.checked = !!(av && av[parseInt(c.getAttribute('data-nivel'), 10) - 1]);
+      });
+    }
+
+    function doTeamLogin(){
+      var g = $('teamGrupo').value.trim(), n = $('teamNum').value.trim(), pin = $('teamPin').value.trim(), msg = $('teamMsg');
+      if(!g || !n || !pin){ msg.textContent = 'Escribe el grupo, el número de equipo y el PIN del equipo.'; return; }
+      $('btnTeamLogin').disabled = true; msg.textContent = 'Verificando...';
+      api({accion:'loginEquipo', grupo:g, equipo:n, pin:pin}).then(function(res){
+        $('btnTeamLogin').disabled = false;
+        if(!(res && res.ok)){ msg.textContent = (res && res.error) || 'No se pudo entrar.'; return; }
+        equipo = {grupo:res.grupo, equipo:res.equipo, pin:pin, lider:res.lider, integrantes:res.integrantes || [], avance:res.avance || {}};
+        saveEquipo();
+        var owner = res.grupo + '|' + res.equipo;
+        if(eqLocal.owner && eqLocal.owner !== owner){ eqLocal = {owner:owner, quiz:{}}; saveEqLocal(); location.reload(); return; }
+        eqLocal.owner = owner; saveEqLocal();
+        $('teamPin').value = ''; msg.textContent = '';
+        renderEquipo();
+      }).catch(function(){
+        $('btnTeamLogin').disabled = false;
+        msg.textContent = 'No hay conexión con el servidor. Intenta de nuevo en unos segundos.';
+      });
+    }
+    function doTeamLogout(){
+      if(!confirm('¿Cerrar la sesión del equipo? Lo que ya marcaron quedó guardado en el servidor.')) return;
+      try{ sessionStorage.removeItem(EQ_SESSION_KEY); localStorage.removeItem(EQ_LOCAL_KEY); }catch(e){}
+      location.reload();
+    }
+
+    function quizStats(sub){
+      var chk = document.querySelector('.lvl-check[data-subtema="' + sub + '"][data-nivel="2"]');
+      var nv = chk ? chk.closest('.nivel') : null;
+      var box = nv ? nv.querySelector('[id^="quiz-"]') : null;
+      if(!box) return null;
+      var total = box.querySelectorAll('.quiz-item').length;
+      var reg = eqLocal.quiz[box.id] || {};
+      var resp = Object.keys(reg).length, ac = 0;
+      Object.keys(reg).forEach(function(k){ if(reg[k].ok) ac++; });
+      return {aciertos:ac, respondidas:resp, total:total};
+    }
+
+    function onLvlChange(chk){
+      var st = chk.closest('.nivel-done').querySelector('.send-status');
+      var hecho = chk.checked;
+      if(!equipo){ chk.checked = !hecho; st.textContent = 'Primero entra como equipo en la Portada.'; return; }
+      var sub = chk.getAttribute('data-subtema'), lvl = parseInt(chk.getAttribute('data-nivel'), 10);
+      var payload = {accion:'nivel', subtema:sub, nivel:lvl, hecho:hecho};
+      if(lvl === 2) payload.quiz = quizStats(sub);
+      st.textContent = 'Guardando...'; chk.disabled = true;
+      api(conCredEq(payload)).then(function(res){
+        chk.disabled = false;
+        if(res && res.ok){
+          if(!equipo.avance) equipo.avance = {};
+          var a = equipo.avance[sub] || [false,false,false,false]; a[lvl-1] = hecho; equipo.avance[sub] = a; saveEquipo();
+          st.textContent = (hecho ? 'Guardado ✓' : 'Desmarcado ✓') + ' · Nivel alcanzado en este subtema: ' + res.alcanzado;
+        } else { chk.checked = !hecho; st.textContent = 'No se pudo guardar: ' + ((res && res.error) || 'error desconocido'); }
+      }).catch(function(){
+        chk.disabled = false; chk.checked = !hecho;
+        st.textContent = 'No se pudo confirmar. Espera unos segundos e intenta de nuevo.';
+      });
+    }
+
+    function wireEquipoUpload(box){
+      var act = box.getAttribute('data-actividad');
+      var input = box.querySelector('.upload-input'), btn = box.querySelector('.upload-btn'), status = box.querySelector('.upload-status');
+      btn.addEventListener('click', function(){
+        if(!equipo){ status.textContent = 'Primero entra como equipo en la Portada.'; return; }
+        var file = input.files && input.files[0];
+        if(!file){ status.textContent = 'Selecciona el PDF del equipo primero.'; return; }
+        if(file.type !== 'application/pdf'){ status.textContent = 'El archivo debe ser PDF.'; return; }
+        if(file.size > MAX_PDF_MB * 1024 * 1024){ status.textContent = 'El archivo pesa más de ' + MAX_PDF_MB + ' MB. Comprímelo antes de subirlo.'; return; }
+        btn.disabled = true; status.textContent = 'Subiendo ' + file.name + '...';
+        var reader = new FileReader();
+        reader.onload = function(){
+          api(conCredEq({accion:'entregaEquipo', actividad:act, contenidoBase64:String(reader.result).split(',')[1]})).then(function(res){
+            btn.disabled = false;
+            status.textContent = (res && res.ok) ? 'Entrega del equipo confirmada ✓ ' + res.archivo + ' — ' + new Date().toLocaleTimeString()
+                                                 : 'No se pudo guardar: ' + ((res && res.error) || 'error desconocido');
+          }).catch(function(){ btn.disabled = false; status.textContent = 'No se pudo confirmar la entrega. Espera unos segundos e intenta de nuevo.'; });
+        };
+        reader.onerror = function(){ btn.disabled = false; status.textContent = 'No se pudo leer el archivo.'; };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function initTemas(){
+      document.querySelectorAll('section.view[data-nav="temas"]').forEach(function(sec){
+        var tema = sec.getAttribute('data-title').split(' ')[0];        // "2.1"
+        var act = 'T' + tema.replace('.', '');                            // "T21"
+        var h2 = sec.querySelector('h2');
+        if(h2){
+          var gate = document.createElement('div');
+          gate.className = 'gate-note'; gate.setAttribute('data-gate-team', '');
+          gate.textContent = '🔒 Entra como equipo en la Portada para registrar el avance y subir la evidencia.';
+          h2.parentNode.insertBefore(gate, h2.nextSibling);
+        }
+        sec.querySelectorAll('.subtema-block').forEach(function(blk, bi){
+          var sub = tema + '-' + String.fromCharCode(65 + bi);            // "2.1-A"
+          blk.querySelectorAll('.nivel').forEach(function(nv){
+            var m = nv.className.match(/\bn([1-4])\b/); if(!m) return;
+            var f = document.createElement('div'); f.className = 'nivel-done';
+            f.innerHTML = '<label><input type="checkbox" class="lvl-check" data-subtema="' + sub + '" data-nivel="' + m[1] + '"> ✓ Terminamos este nivel</label><span class="send-status"></span>';
+            nv.appendChild(f);
+          });
+        });
+        var box = document.createElement('div');
+        box.className = 'entrega-box equipo-box';
+        box.innerHTML = '<h4>📎 Entrega del equipo — Tema ' + tema + '</h4>' +
+          '<p>Suban <b>un solo archivo PDF por equipo</b> con la evidencia del trabajo de este tema: datos, bosquejo, procedimiento y resultado con sus <b>unidades de medida</b> (obligatorias).</p>' +
+          '<p style="font-size:.82rem;">La página lo guarda con el nombre <code>' + act + '_Eq##_Grupo.pdf</code> en la carpeta de tu maestra. Si vuelven a subirlo, se queda el más reciente.</p>' +
+          '<div class="eq-upload-block" data-actividad="' + act + '"><div class="upload-row"><input type="file" class="upload-input" accept="application/pdf"><button type="button" class="upload-btn">Enviar</button></div><div class="upload-status"></div></div>';
+        sec.appendChild(box);
+      });
+      var cierre = document.querySelector('section.view[data-title="Cierre · Reto exprés"]');
+      if(cierre){
+        var c = document.createElement('div');
+        c.className = 'card equipo-box';
+        c.innerHTML = '<h3>📎 Entrega del equipo — video o presentación con audio</h3>' +
+          '<div class="gate-note" data-gate-team>🔒 Entra como equipo en la Portada para enviar su enlace.</div>' +
+          '<p>Como cierre, socialicen sus resultados: <b>expliquen su procedimiento</b> en un video o en una presentación con audio.</p>' +
+          '<ol><li>Suban su video (o presentación) a su Drive. Si es de PowerPoint con narración, expórtenla como video (Archivo → Exportar → Crear un video).</li>' +
+          '<li>Clic derecho → <b>Compartir</b> → Acceso general → <b>Cualquier persona con el enlace</b> (Lector).</li>' +
+          '<li>Copien el enlace y péguenlo aquí.</li></ol>' +
+          '<div class="upload-row"><input type="url" id="cierreUrl" class="upload-input" placeholder="https://drive.google.com/..."><button type="button" class="upload-btn" id="btnCierre">Enviar enlace</button></div>' +
+          '<div class="upload-status" id="cierreStatus"></div>';
+        cierre.appendChild(c);
+      }
+    }
+
+    function wireCierre(){
+      var btn = $('btnCierre'); if(!btn) return;
+      btn.addEventListener('click', function(){
+        var st = $('cierreStatus'), url = $('cierreUrl').value.trim();
+        if(!equipo){ st.textContent = 'Primero entra como equipo en la Portada.'; return; }
+        if(!url){ st.textContent = 'Pega el enlace de Drive de su video o presentación.'; return; }
+        btn.disabled = true; st.textContent = 'Verificando el enlace...';
+        api(conCredEq({accion:'cierre', enlace:url})).then(function(res){
+          btn.disabled = false;
+          st.textContent = (res && res.ok) ? 'Enlace recibido ✓ Archivo: ' + res.archivo + ' — ' + new Date().toLocaleTimeString()
+                                           : (res && res.error) || 'No se pudo verificar el enlace.';
+        }).catch(function(){ btn.disabled = false; st.textContent = 'No se pudo confirmar el envío. Intenta de nuevo en unos segundos.'; });
+      });
+    }
+
     /* ---------- arranque ---------- */
     document.addEventListener('DOMContentLoaded', function(){
       $('studentDate').value = hoyLocal();
+      initTemas();
       restore();
       renderSesion();
+      renderEquipo();
 
       document.querySelectorAll('input.opt-radio').forEach(function(r){
         r.addEventListener('change', function(){
@@ -1259,6 +1456,12 @@
       $('btnPrint').addEventListener('click', function(){ window.print(); });
       document.querySelectorAll('[data-send]').forEach(wireSend);
       document.querySelectorAll('.upload-block').forEach(wireUploadBlock);
+      document.querySelectorAll('.eq-upload-block').forEach(wireEquipoUpload);
+      document.querySelectorAll('.lvl-check').forEach(function(c){ c.addEventListener('change', function(){ onLvlChange(c); }); });
+      $('btnTeamLogin').addEventListener('click', doTeamLogin);
+      ['teamGrupo','teamNum','teamPin'].forEach(function(id){ $(id).addEventListener('keydown', function(e){ if(e.key === 'Enter') doTeamLogin(); }); });
+      $('btnTeamLogout').addEventListener('click', doTeamLogout);
+      wireCierre();
     });
   })();
 
