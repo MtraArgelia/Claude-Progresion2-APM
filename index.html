@@ -1226,9 +1226,14 @@
     /* ---------- impresión / exportar: nombre del alumno en el archivo y en cada hoja ---------- */
     var tituloOriginal = document.title;
     window.addEventListener('beforeprint', function(){
-      if(sesion) document.title = 'Cuadernillo_P2_' + limpio(sesion.nombre) + '_' + limpio(sesion.grupo);
+      var act = document.querySelector('section.view.active');
+      var seccion = act ? act.getAttribute('data-title') : '';
+      function sinAcentos(t){ return String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+      var partes = ['P2', limpio(sinAcentos(seccion))];
+      if(sesion){ partes.push(limpio(sinAcentos(sesion.nombre))); partes.push(limpio(sinAcentos(sesion.grupo))); }
+      document.title = partes.filter(Boolean).join('_');
       var ph = $('printHeader');
-      if(ph) ph.textContent = (sesion ? sesion.nombre + ' · Grupo ' + sesion.grupo + (sesion.equipo ? ' · Equipo ' + sesion.equipo : '') + ' · ' : '') + 'Fecha: ' + ($('studentDate').value || hoyLocal());
+      if(ph) ph.textContent = (sesion ? sesion.nombre + ' · Grupo ' + sesion.grupo + (sesion.equipo ? ' · Equipo ' + sesion.equipo : '') + ' · ' : '') + (seccion ? seccion + ' · ' : '') + 'Fecha: ' + ($('studentDate').value || hoyLocal());
     });
     window.addEventListener('afterprint', function(){ document.title = tituloOriginal; });
 
