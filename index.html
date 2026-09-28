@@ -208,6 +208,12 @@
   .coev-pick{margin:.6rem 0; font-size:.85rem;}
   .coev-pick select{min-width:240px;}
   #printHeader{display:none;}
+  .sum-item{margin:.9rem 0; padding-bottom:.7rem; border-bottom:1px dashed var(--line);}
+  .sum-item:last-child{border-bottom:none;}
+  .sum-item p{margin:.2rem 0 .4rem 0;}
+  .sum-lbl{display:block; font-size:.78rem; font-weight:700; color:var(--teal-dark); margin:.4rem 0 .2rem 0;}
+  textarea.sum-resp{width:100%; min-height:3.2rem; box-sizing:border-box; font:inherit; font-size:.92rem; padding:.5rem .6rem; border:1.5px dashed var(--line); border-radius:10px; background:#fff; resize:vertical;}
+  textarea.sum-resp:focus{outline:none; border-color:var(--teal-dark); border-style:solid;}
   .nivel-done{margin-top:.8rem; padding:.5rem .8rem; background:#F0F7F4; border:1.5px dashed var(--teal-dark); border-radius:10px; display:flex; gap:.7rem; align-items:center; flex-wrap:wrap; font-size:.85rem; font-weight:600; color:var(--teal-dark);}
   .nivel-done label{cursor:pointer; display:flex; align-items:center; gap:.4rem;}
   .nivel-done input{width:1.15rem; height:1.15rem; accent-color:var(--teal-dark);}
@@ -305,6 +311,7 @@
       <div class="mascot" id="coverMascot" style="margin:0 auto .4rem;"></div>
       <div class="kicker">Aplicación del Pensamiento Matemático — 5° semestre</div>
       <h1>Progresión 2 · Geometría euclidiana</h1>
+      <div style="text-align:center;"><span class="badge">Etapa 1 · Problematización</span></div>
       <p class="reto">"El reto de Eratóstenes": hace más de 2000 años, sin viajar y usando solo una vara, su sombra y geometría, un hombre estimó el tamaño de la Tierra. ¿Qué más podemos medir sin poder tocarlo?</p>
       <div class="field-row">
         <div class="field"><label>Nombre del estudiante</label><div class="fill" id="sessNombre">—</div></div>
@@ -351,6 +358,19 @@
       </div>
     </div>
 
+        <div class="card">
+      <span class="badge">Ruta de la progresión · 5 etapas</span>
+      <table class="nombrado">
+        <tr><th>Etapa</th><th>Dónde la encuentras</th></tr>
+        <tr><td><b>1 · Problematización</b></td><td>Portada y Tema 2.1 (el reto de Eratóstenes)</td></tr>
+        <tr><td><b>2 · Exploración de saberes previos</b></td><td>Diagnóstico (y Repaso, si lo necesitas)</td></tr>
+        <tr><td><b>3 · Investigación</b></td><td>Temas 2.1, 2.2 y 2.3</td></tr>
+        <tr><td><b>4 · Integración de perspectivas</b></td><td>Tema 2.3 · Mediciones y otros tipos de relaciones matemáticas</td></tr>
+        <tr><td><b>5 · Acción y socialización</b></td><td>Cierre · Reto exprés, Autoevaluación y Coevaluación</td></tr>
+      </table>
+      <p class="note-informativa">La Sumativa es trabajo independiente: se resuelve fuera de clase y se entrega en la siguiente sesión.</p>
+    </div>
+
     <div class="card">
       <span class="badge">Cómo trabajar con este cuadernillo</span>
       <p>Cada tema tiene <b>4 niveles</b>. Avanza en orden: si el Nivel 1 te queda claro, sigue al 2; si un nivel se te complica, no pasa nada — puedes volver a intentarlo cuantas veces quieras.</p>
@@ -390,7 +410,7 @@
 
   <!-- REPASO -->
   <section class="view" data-title="Repaso" data-nav="top">
-    <span class="badge purple">Fichas de repaso rápido</span>
+    <span class="badge purple">Apoyo a la Etapa 2 · Fichas de repaso rápido</span>
     <h2>Repaso</h2>
 
     <div class="card">
@@ -451,7 +471,7 @@
   <!-- TEMA 2.1 -->
   <section class="view" data-title="2.1 Eratóstenes" data-nav="temas">
 <div class="navy-banner">PROGRESIÓN 2 · TEMA 2.1</div>
-    <span class="badge">Tema 2.1</span>
+    <span class="badge">Tema 2.1 · Etapas 1 y 3 · Problematización + Investigación (caso 1)</span>
     <h2>2.1 · Cálculo de distancias mediante geometría</h2>
     <div class="intro-ampliada">
       <h4>¿Cómo surgió la necesidad?</h4>
@@ -547,7 +567,7 @@
   <!-- TEMA 2.2 -->
   <section class="view" data-title="2.2 Tales" data-nav="temas">
 <div class="navy-banner">PROGRESIÓN 2 · TEMA 2.2</div>
-    <span class="badge">Tema 2.2</span>
+    <span class="badge">Tema 2.2 · Etapa 3 · Investigación (caso 2)</span>
     <h2>2.2 · El teorema de Tales y los ángulos rectos</h2>
     <div class="intro-ampliada">
       <h4>¿Cómo surgió la necesidad?</h4>
@@ -634,7 +654,7 @@
   <!-- TEMA 2.3 -->
   <section class="view" data-title="2.3 Pitágoras" data-nav="temas">
 <div class="navy-banner">PROGRESIÓN 2 · TEMA 2.3</div>
-    <span class="badge">Tema 2.3</span>
+    <span class="badge">Tema 2.3 · Etapa 3 · Investigación (caso 3) y Etapa 4 · Integración de perspectivas</span>
     <h2>2.3 · El teorema de Pitágoras y sus aplicaciones</h2>
     <div class="intro-ampliada">
       <h4>¿Cómo surgió la necesidad?</h4>
@@ -691,6 +711,7 @@
 </div>
 <div class="subtema-block">
 <h3 style="font-size:1.25rem;color:var(--teal-dark);">Mediciones y otros tipos de relaciones matemáticas</h3>
+<span class="badge purple">Etapa 4 · Integración de perspectivas</span>
 <div class="nivel n1">
       <div class="nivel-head"><div class="lvlbadge n1">1</div><div><div class="lvltitle">Exploro</div><div class="lvl-sub">Introducción y ejemplo guiado</div></div></div>
       <p>A veces se conocen varios datos de una situación, pero no existe una fórmula geométrica lista para usar. En esos casos se puede representar la situación mediante un modelo algebraico — un sistema de ecuaciones.</p>
@@ -755,7 +776,7 @@
 
   <!-- AUTOEVALUACIÓN -->
   <section class="view" data-title="Autoevaluación" data-nav="eval">
-    <span class="badge gold">Etapa 5 · Cierre</span>
+    <span class="badge gold">Etapa 5 · Acción y socialización · Cierre</span>
     <h2>Autoevaluación</h2>
     <div class="gate-note" data-gate>🔒 Inicia sesión en la Portada para enviar tu autoevaluación.</div>
     <p><i>Objetivo: valorar tu aprendizaje y la forma en que lo desarrollaste.</i></p>
@@ -770,7 +791,7 @@
 
   <!-- COEVALUACIÓN -->
   <section class="view" data-title="Coevaluación" data-nav="eval">
-    <span class="badge gold">Etapa 5 · Cierre</span>
+    <span class="badge gold">Etapa 5 · Acción y socialización · Cierre</span>
     <h2>Coevaluación</h2>
     <div class="gate-note" data-gate>🔒 Inicia sesión en la Portada para evaluar a tus compañeros(as) de equipo.</div>
     <p><i>Objetivo: valorar el desempeño de tu compañero(a) en el trabajo de equipo.</i></p>
@@ -845,37 +866,73 @@
 
     <div class="card">
       <h3>Conexiones — lectura en inglés</h3>
-      <p>Lee el texto "Pythagorean Theorem" (sección Conexiones de tu libro de apoyo) y responde:</p>
-      <ol>
-        <li>¿Qué usaron los egipcios para crear triángulos rectángulos?</li>
-        <li>¿Quién escribió el texto matemático llamado <i>Elementos</i>, que incluye una prueba del teorema de Pitágoras?</li>
-        <li>¿Qué figura geométrica usó James A. Garfield para probar el teorema de Pitágoras?</li>
-      </ol>
-      <textarea class="scratch" placeholder="Respuestas (para tu cuaderno)..."></textarea>
+      <p>Lee el texto "Pythagorean Theorem" (sección Conexiones de tu libro de apoyo) y responde cada pregunta en su espacio:</p>
+      <div class="sum-item">
+        <p><b>1.</b> ¿Qué usaron los egipcios para crear triángulos rectángulos?</p>
+        <textarea class="sum-resp" data-sec="lectura" data-clave="L1" rows="3" placeholder="Escribe tu respuesta"></textarea>
+      </div>
+      <div class="sum-item">
+        <p><b>2.</b> ¿Quién escribió el texto matemático llamado <i>Elementos</i>, que incluye una prueba del teorema de Pitágoras?</p>
+        <textarea class="sum-resp" data-sec="lectura" data-clave="L2" rows="3" placeholder="Escribe tu respuesta"></textarea>
+      </div>
+      <div class="sum-item">
+        <p><b>3.</b> ¿Qué figura geométrica usó James A. Garfield para probar el teorema de Pitágoras?</p>
+        <textarea class="sum-resp" data-sec="lectura" data-clave="L3" rows="3" placeholder="Escribe tu respuesta"></textarea>
+      </div>
+      <div class="send-row"><button type="button" class="send-btn" data-send="sumLectura">Enviar mis respuestas de la lectura</button><span class="send-status" data-status="sumLectura"></span></div>
     </div>
 
     <div class="card">
       <h3>Cuestionario sumativo</h3>
-      <p>Analiza los siguientes cinco escenarios y realiza los cálculos correspondientes en tu cuaderno.</p>
-      <ol>
-        <li>En el océano Atlántico se han trazado dos líneas paralelas imaginarias para estudiar nuevas rutas de navegación seguras. Un barco sigue una trayectoria transversal que cruza estas dos líneas. El barco detecta una pequeña isla exactamente sobre la primera línea, donde el ángulo con la trayectoria del barco es de 62° y el ángulo formado con la isla es de (3x + 2)°. Calcula el valor de x.</li>
-        <li>Dos estaciones terrestres de comunicación, A y B, están separadas entre sí por 352 km en línea recta. El satélite Morelos III se encuentra en órbita geoestacionaria, alineado directamente sobre la estación A, a 38 000 km de distancia de ella. ¿Cuál es la distancia entre la estación B y el satélite?</li>
-        <li>La Subdirección de Industria Aeronáutica Militar (SGIAM) realiza pruebas de lanzamiento de cohetes en la laguna de Sayula. Un cohete alcanzó una altura de 6 540 m, mientras que una estación de seguimiento a 1.21 km mide la distancia directa al cohete. ¿Cuál fue la distancia obtenida?</li>
-        <li>Un agricultor adquirió un terreno en forma de triángulo rectángulo para sembrar cultivos. La parcela tiene una base de 12 m y la diagonal (hipotenusa) mide 20 m. ¿Cuál es la altura del terreno? ¿De qué otra manera se puede encontrar el valor sin hacer uso del teorema de Pitágoras?</li>
-        <li>Jorge tiene una panadería donde se producen panes de dulce y salados. Cada pan de dulce requiere 3 minutos de amasado y 5 de horneado; cada pan salado requiere 2 minutos de amasado y 4 de horneado. Se dispone de 240 minutos de amasado y 400 de horneado, utilizados en su totalidad. ¿Cuántos panes de dulce y panes salados produce Jorge en el día?</li>
-      </ol>
+      <p>Analiza los siguientes cinco escenarios y realiza los cálculos en tu cuaderno. El <b>procedimiento, los datos y el bosquejo</b> van en tu archivo PDF (EJE); aquí escribes solo tus <b>respuestas finales</b>, siempre con sus <b>unidades de medida</b>.</p>
+      <div class="sum-item">
+        <p><b>Ejercicio 1.</b> En el océano Atlántico se han trazado dos líneas paralelas imaginarias para estudiar nuevas rutas de navegación seguras. Un barco sigue una trayectoria transversal que cruza estas dos líneas. El barco detecta una pequeña isla exactamente sobre la primera línea, donde el ángulo con la trayectoria del barco es de 62° y el ángulo formado con la isla es de (3x + 2)°. Calcula el valor de x.</p>
+        <label class="sum-lbl">Tu respuesta final (con unidades de medida)</label>
+        <textarea class="sum-resp" data-sec="cuestionario" data-clave="E1" rows="2" placeholder="Escribe tu resultado con sus unidades de medida"></textarea>
+      </div>
+      <div class="sum-item">
+        <p><b>Ejercicio 2.</b> Dos estaciones terrestres de comunicación, A y B, están separadas entre sí por 352 km en línea recta. El satélite Morelos III se encuentra en órbita geoestacionaria, alineado directamente sobre la estación A, a 38 000 km de distancia de ella. ¿Cuál es la distancia entre la estación B y el satélite?</p>
+        <label class="sum-lbl">Distancia entre la estación B y el satélite (con unidades)</label>
+        <textarea class="sum-resp" data-sec="cuestionario" data-clave="E2" rows="2" placeholder="Escribe tu resultado con sus unidades de medida"></textarea>
+      </div>
+      <div class="sum-item">
+        <p><b>Ejercicio 3.</b> La Subdirección de Industria Aeronáutica Militar (SGIAM) realiza pruebas de lanzamiento de cohetes en la laguna de Sayula. Un cohete alcanzó una altura de 6 540 m, mientras que una estación de seguimiento a 1.21 km mide la distancia directa al cohete. ¿Cuál fue la distancia obtenida?</p>
+        <label class="sum-lbl">Distancia obtenida (con unidades)</label>
+        <textarea class="sum-resp" data-sec="cuestionario" data-clave="E3" rows="2" placeholder="Escribe tu resultado con sus unidades de medida"></textarea>
+      </div>
+      <div class="sum-item">
+        <p><b>Ejercicio 4.</b> Un agricultor adquirió un terreno en forma de triángulo rectángulo para sembrar cultivos. La parcela tiene una base de 12 m y la diagonal (hipotenusa) mide 20 m. ¿Cuál es la altura del terreno? ¿De qué otra manera se puede encontrar el valor sin hacer uso del teorema de Pitágoras?</p>
+        <label class="sum-lbl">Altura del terreno (con unidades)</label>
+        <textarea class="sum-resp" data-sec="cuestionario" data-clave="E4a" rows="2" placeholder="Escribe tu resultado con sus unidades de medida"></textarea><label class="sum-lbl">¿De qué otra manera se puede encontrar el valor sin usar el teorema de Pitágoras?</label>
+        <textarea class="sum-resp" data-sec="cuestionario" data-clave="E4b" rows="2" placeholder="Explica con tus palabras"></textarea>
+      </div>
+      <div class="sum-item">
+        <p><b>Ejercicio 5.</b> Jorge tiene una panadería donde se producen panes de dulce y salados. Cada pan de dulce requiere 3 minutos de amasado y 5 de horneado; cada pan salado requiere 2 minutos de amasado y 4 de horneado. Se dispone de 240 minutos de amasado y 400 de horneado, utilizados en su totalidad. ¿Cuántos panes de dulce y panes salados produce Jorge en el día?</p>
+        <label class="sum-lbl">Panes de dulce (con unidades)</label>
+        <textarea class="sum-resp" data-sec="cuestionario" data-clave="E5a" rows="2" placeholder="Escribe tu resultado con sus unidades de medida"></textarea><label class="sum-lbl">Panes salados (con unidades)</label>
+        <textarea class="sum-resp" data-sec="cuestionario" data-clave="E5b" rows="2" placeholder="Escribe tu resultado con sus unidades de medida"></textarea>
+      </div>
       <p><b>Preguntas conceptuales:</b></p>
-      <ol>
-        <li>¿Cómo defines con tus propias palabras el teorema de Tales?</li>
-        <li>¿Qué aplicaciones a la vida diaria tiene el teorema de Pitágoras?</li>
-        <li>¿Cuáles son las ternas pitagóricas?</li>
-      </ol>
+      <div class="sum-item">
+        <p><b>1.</b> ¿Cómo defines con tus propias palabras el teorema de Tales?</p>
+        <textarea class="sum-resp" data-sec="cuestionario" data-clave="C1" rows="3" placeholder="Escribe tu respuesta"></textarea>
+      </div>
+      <div class="sum-item">
+        <p><b>2.</b> ¿Qué aplicaciones a la vida diaria tiene el teorema de Pitágoras?</p>
+        <textarea class="sum-resp" data-sec="cuestionario" data-clave="C2" rows="3" placeholder="Escribe tu respuesta"></textarea>
+      </div>
+      <div class="sum-item">
+        <p><b>3.</b> ¿Cuáles son las ternas pitagóricas?</p>
+        <textarea class="sum-resp" data-sec="cuestionario" data-clave="C3" rows="3" placeholder="Escribe tu respuesta"></textarea>
+      </div>
+      <div class="send-row"><button type="button" class="send-btn" data-send="sumCuestionario">Enviar mis respuestas del cuestionario</button><span class="send-status" data-status="sumCuestionario"></span></div>
+      <p class="note-informativa">Puedes enviar tus respuestas más de una vez: se guarda la versión más reciente. Tus respuestas también se guardan en este dispositivo mientras las escribes.</p>
     </div>
   </section>
 
   <!-- RECURSOS -->
   <section class="view" data-title="Recursos" data-nav="top">
-    <span class="badge purple">Biblioteca de apoyo</span>
+    <span class="badge purple">Apoyo a las Etapas 3 y 4 · Biblioteca de recursos</span>
     <h2>Recursos</h2>
     <p>Aquí vivirán los recursos interactivos complementarios (uno por tema, con código QR) que acompañan cada nivel 1, siguiendo el mismo formato que los de Progresión 1. Están en construcción — no cuentan para tu avance.</p>
   </section>
@@ -1207,6 +1264,16 @@
           var items = Object.keys(data.diag).map(function(k){ return data.diag[k]; }).sort(function(a,b){ return a.n - b.n; });
           if(!items.length){ st.textContent = 'Contesta al menos una pregunta primero.'; return; }
           enviar(btn, st, {accion:'diagnostico', items:items}, function(){ return 'Diagnóstico enviado ✓'; });
+        } else if(tipo === 'sumLectura' || tipo === 'sumCuestionario'){
+          var sec = (tipo === 'sumLectura') ? 'lectura' : 'cuestionario';
+          var todas = document.querySelectorAll('textarea.sum-resp[data-sec="' + sec + '"]');
+          var items = [];
+          todas.forEach(function(t){ if(t.value.trim()) items.push({clave:t.getAttribute('data-clave'), respuesta:t.value.trim()}); });
+          if(!items.length){ st.textContent = 'Escribe al menos una respuesta antes de enviar.'; return; }
+          var faltan = todas.length - items.length;
+          enviar(btn, st, {accion:'sumativa', items:items}, function(res){
+            return res.guardadas + ' respuesta(s) enviada(s) ✓' + (faltan > 0 ? ' · Te faltan ' + faltan + ' por contestar' : ' · ¡Completo!');
+          });
         } else if(tipo === 'semaforo'){
           var det = radiosChecked('q_1_');
           if(det.length < 3){ st.textContent = 'Marca los tres bloques del semáforo.'; return; }
@@ -1447,6 +1514,12 @@
           data.respuestas[rowId] = r.value;
           saveData();
         });
+      });
+      data.sumativa = data.sumativa || {};
+      document.querySelectorAll('textarea.sum-resp').forEach(function(t){
+        var k = t.getAttribute('data-clave');
+        if(data.sumativa[k]) t.value = data.sumativa[k];
+        t.addEventListener('input', function(){ data.sumativa[k] = t.value; saveData(); });
       });
       $('btnLogin').addEventListener('click', doLogin);
       ['loginGrupo','loginLista','loginPin'].forEach(function(id){
