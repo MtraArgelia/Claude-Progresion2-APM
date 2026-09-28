@@ -195,6 +195,20 @@
   #saveStatusBar button{font-size:.8rem; padding:.35rem .7rem; border-radius:8px; border:1px solid var(--teal-dark); background:#fff; color:var(--teal-dark); cursor:pointer;}
   #saveStatusBar button:active{transform:translateY(1px);}
   @media print{ #saveStatusBar{display:none;} }
+  .login-box{background:#fff; border:2px solid var(--teal-dark); border-radius:14px; padding:.8rem 1rem; margin:1rem auto 0; max-width:640px; text-align:left;}
+  .login-box h3{margin:0 0 .5rem 0; font-size:.95rem; color:var(--teal-dark);}
+  .login-row{display:flex; gap:.6rem; flex-wrap:wrap; align-items:flex-end;}
+  .login-row label{display:flex; flex-direction:column; font-size:.68rem; font-weight:700; color:var(--ink-soft); text-transform:uppercase; flex:1; min-width:105px;}
+  .login-row input, .coev-pick select{font:inherit; font-size:.9rem; padding:.4rem .5rem; border:1.5px solid var(--line); border-radius:8px; margin-top:.2rem; background:#fff;}
+  .login-row button, .send-btn{background:var(--teal-dark); color:#fff; border:none; padding:.5rem .95rem; border-radius:8px; font-size:.85rem; font-weight:600; cursor:pointer;}
+  .login-row button:disabled, .send-btn:disabled{opacity:.5; cursor:not-allowed;}
+  .gate-note{background:#FFF3D6; border:1.5px solid #E6B94A; border-radius:10px; padding:.5rem .8rem; font-size:.82rem; margin:.6rem 0;}
+  .send-row{display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; margin:.7rem 0;}
+  .send-status{font-size:.8rem;}
+  .coev-pick{margin:.6rem 0; font-size:.85rem;}
+  .coev-pick select{min-width:240px;}
+  #printHeader{display:none;}
+  @media print{ #printHeader{display:block; position:fixed; top:0; left:0; right:0; font-size:11px; border-bottom:1px solid #999; padding:2px 0; text-align:center; background:#fff;} body{padding-top:20px;} .login-box,.gate-note,.send-row{display:none !important;} }
 
   .entrega-box{background:#fff; border:2px solid var(--teal-dark); border-radius:14px; padding:1rem 1.1rem; margin:.8rem 0;}
   .entrega-box h4{color:var(--teal-dark); margin:0 0 .4rem 0; font-size:1rem;}
@@ -277,6 +291,7 @@
   </div>
 </header>
 
+<div id="printHeader"></div>
 <main>
 
   <!-- PORTADA -->
@@ -287,10 +302,22 @@
       <h1>Progresión 2 · Geometría euclidiana</h1>
       <p class="reto">"El reto de Eratóstenes": hace más de 2000 años, sin viajar y usando solo una vara, su sombra y geometría, un hombre estimó el tamaño de la Tierra. ¿Qué más podemos medir sin poder tocarlo?</p>
       <div class="field-row">
-        <div class="field"><label>Nombre del estudiante</label><div class="fill"><input type="text" id="studentName" class="student-input" placeholder="Escribe tu nombre" autocomplete="off"></div></div>
-        <div class="field"><label>Grupo</label><div class="fill"><input type="text" id="studentGroup" class="student-input" placeholder="Ej. 501" autocomplete="off"></div></div>
+        <div class="field"><label>Nombre del estudiante</label><div class="fill" id="sessNombre">—</div></div>
+        <div class="field"><label>Grupo</label><div class="fill" id="sessGrupo">—</div></div>
+        <div class="field"><label>Equipo</label><div class="fill" id="sessEquipo">—</div></div>
         <div class="field"><label>Docente</label><div class="fill">Dora Argelia Reyes Ibarra</div></div>
-        <div class="field"><label>Fecha</label><div class="fill"></div></div>
+        <div class="field"><label>Fecha</label><div class="fill"><input type="date" id="studentDate" class="student-input"></div></div>
+      </div>
+      <div class="login-box" id="loginBox">
+        <h3>🔐 Entra con tu grupo, número de lista y PIN</h3>
+        <div class="login-row">
+          <label>Grupo<input id="loginGrupo" placeholder="Ej. 5F" autocomplete="off"></label>
+          <label>N.º de lista<input id="loginLista" inputmode="numeric" placeholder="Ej. 12" autocomplete="off"></label>
+          <label>PIN<input id="loginPin" type="password" inputmode="numeric" placeholder="4 dígitos" autocomplete="off"></label>
+          <button type="button" id="btnLogin">Entrar</button>
+        </div>
+        <div id="loginMsg" class="send-status"></div>
+        <p class="note-informativa">Tu maestra te da tu PIN. Si usas el dispositivo de tu equipo, al terminar toca "Cerrar sesión" para que entre tu compañero(a).</p>
       </div>
       <div class="logo-strip">
         <div class="logo-slot" style="background:#fff;"><img src="data:image/png;base64,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" alt="Logo DGETI" style="max-width:100%;max-height:100%;object-fit:contain;"></div>
@@ -311,7 +338,7 @@
         <div class="keyitem"><span class="keyicon">🌍</span><div><b>3 · Aplico</b><span>El concepto aplicado a una situación distinta.</span></div></div>
         <div class="keyitem"><span class="keyicon">🚀</span><div><b>4 · Transfiero</b><span>Un reto más abierto, conectado con lo que viene.</span></div></div>
       </div>
-      <p class="note-informativa" style="margin-top:.7rem;">Esta versión práctica no guarda tus respuestas — es para explorar y repasar. La entrega oficial de la progresión sigue el proceso que indique tu docente en clase.</p>
+      <p class="note-informativa" style="margin-top:.7rem;">Entra con tu PIN para que se registren tu diagnóstico, semáforo, autoevaluación, coevaluación y entregas. Los niveles de práctica dan retroalimentación al instante y puedes repetirlos las veces que quieras.</p>
     </div>
   </section>
 
@@ -319,10 +346,12 @@
   <section class="view" data-title="Diagnóstico" data-nav="top">
     <span class="badge coral">Etapa 2 · Exploración de saberes previos</span>
     <h2>Diagnóstico corto</h2>
+    <div class="gate-note" data-gate>🔒 Inicia sesión en la Portada para que tus respuestas se registren.</div>
     <div class="mascot-row"><div class="mascot" data-mood="neutral"></div>
       <div class="bubble">No es calificado. Sirve para que sepas qué repasar antes de entrar a la progresión. Toca una opción para ver si acertaste.</div>
     </div>
     <div id="quiz"></div>
+    <div class="send-row"><button type="button" class="send-btn" data-send="diagnostico">Enviar mi diagnóstico</button><span class="send-status" data-status="diagnostico"></span></div>
 
     <div class="card">
       <h3>Semáforo de repaso</h3>
@@ -333,6 +362,7 @@
         <tr data-rowid="q_1_3"><td>C · Rectas perpendiculares</td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_1_3" value="0" class="opt-radio" data-row="q_1_3" data-optlabel="🟢 Lo domino"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_1_3" value="1" class="opt-radio" data-row="q_1_3" data-optlabel="🟡 A medias"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_1_3" value="2" class="opt-radio" data-row="q_1_3" data-optlabel="🔴 Necesito repasarlo"><span class="opt-mark"></span></label></td></tr>
       </table>
       <p class="note-informativa">Si marcaste 🔴 en algún bloque, ve a "Repaso" y trabaja la ficha correspondiente antes de seguir.</p>
+      <div class="send-row"><button type="button" class="send-btn" data-send="semaforo">Enviar mi semáforo</button><span class="send-status" data-status="semaforo"></span></div>
     </div>
   </section>
 
@@ -705,6 +735,7 @@
   <section class="view" data-title="Autoevaluación" data-nav="eval">
     <span class="badge gold">Etapa 5 · Cierre</span>
     <h2>Autoevaluación</h2>
+    <div class="gate-note" data-gate>🔒 Inicia sesión en la Portada para enviar tu autoevaluación.</div>
     <p><i>Objetivo: valorar tu aprendizaje y la forma en que lo desarrollaste.</i></p>
     <table class="semaforo">
         <tr><th>Indicador</th><th>Destacado</th><th>Satisfactorio</th><th>En proceso</th><th>Requiere fort.</th></tr>
@@ -712,25 +743,31 @@
         <tr data-rowid="q_4_2"><td>Resolví problemas con precisión, justificando cada paso con el concepto adecuado (argumentación matemática).</td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_4_2" value="0" class="opt-radio" data-row="q_4_2" data-optlabel="Destacado"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_4_2" value="1" class="opt-radio" data-row="q_4_2" data-optlabel="Satisfactorio"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_4_2" value="2" class="opt-radio" data-row="q_4_2" data-optlabel="En proceso"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_4_2" value="3" class="opt-radio" data-row="q_4_2" data-optlabel="Requiere fort."><span class="opt-mark"></span></label></td></tr>
         <tr data-rowid="q_4_3"><td>Participé activamente en el Reto de medición y propuse ideas al equipo.</td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_4_3" value="0" class="opt-radio" data-row="q_4_3" data-optlabel="Destacado"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_4_3" value="1" class="opt-radio" data-row="q_4_3" data-optlabel="Satisfactorio"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_4_3" value="2" class="opt-radio" data-row="q_4_3" data-optlabel="En proceso"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_4_3" value="3" class="opt-radio" data-row="q_4_3" data-optlabel="Requiere fort."><span class="opt-mark"></span></label></td></tr>
       </table>
+    <div class="send-row"><button type="button" class="send-btn" data-send="autoevaluacion">Enviar mi autoevaluación</button><span class="send-status" data-status="autoevaluacion"></span></div>
   </section>
 
   <!-- COEVALUACIÓN -->
   <section class="view" data-title="Coevaluación" data-nav="eval">
     <span class="badge gold">Etapa 5 · Cierre</span>
     <h2>Coevaluación</h2>
+    <div class="gate-note" data-gate>🔒 Inicia sesión en la Portada para evaluar a tus compañeros(as) de equipo.</div>
     <p><i>Objetivo: valorar el desempeño de tu compañero(a) en el trabajo de equipo.</i></p>
+    <div class="coev-pick"><label><b>¿A quién evalúas?</b><br><select id="coevSel"><option value="">— Elige a tu compañero(a) —</option></select></label> <span class="send-status" id="coevNote"></span></div>
     <table class="semaforo">
         <tr><th>Indicador</th><th>Destacado</th><th>Satisfactorio</th><th>En proceso</th><th>Requiere fort.</th></tr>
         <tr data-rowid="q_5_1"><td>Participó activamente en las actividades en equipo.</td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_1" value="0" class="opt-radio" data-row="q_5_1" data-optlabel="Destacado"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_1" value="1" class="opt-radio" data-row="q_5_1" data-optlabel="Satisfactorio"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_1" value="2" class="opt-radio" data-row="q_5_1" data-optlabel="En proceso"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_1" value="3" class="opt-radio" data-row="q_5_1" data-optlabel="Requiere fort."><span class="opt-mark"></span></label></td></tr>
         <tr data-rowid="q_5_2"><td>Colaboró en la realización del Reto de medición.</td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_2" value="0" class="opt-radio" data-row="q_5_2" data-optlabel="Destacado"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_2" value="1" class="opt-radio" data-row="q_5_2" data-optlabel="Satisfactorio"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_2" value="2" class="opt-radio" data-row="q_5_2" data-optlabel="En proceso"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_2" value="3" class="opt-radio" data-row="q_5_2" data-optlabel="Requiere fort."><span class="opt-mark"></span></label></td></tr>
         <tr data-rowid="q_5_3"><td>Explicó los conceptos con claridad al resto del equipo.</td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_3" value="0" class="opt-radio" data-row="q_5_3" data-optlabel="Destacado"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_3" value="1" class="opt-radio" data-row="q_5_3" data-optlabel="Satisfactorio"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_3" value="2" class="opt-radio" data-row="q_5_3" data-optlabel="En proceso"><span class="opt-mark"></span></label></td><td class="opt-cell"><label class="opt-label"><input type="radio" name="q_5_3" value="3" class="opt-radio" data-row="q_5_3" data-optlabel="Requiere fort."><span class="opt-mark"></span></label></td></tr>
       </table>
+    <div class="send-row"><button type="button" class="send-btn" data-send="coevaluacion">Enviar esta coevaluación</button><span class="send-status" data-status="coevaluacion"></span></div>
+    <p class="note-informativa">Evalúa a un compañero(a) a la vez. Al enviarla, la tabla se limpia para que evalúes al siguiente.</p>
   </section>
 
   <!-- SUMATIVA -->
   <section class="view" data-title="Sumativa" data-nav="eval">
     <span class="homework-flag">🏠 Trabajo independiente — no cuenta como horas de clase</span>
     <h2>Conexiones y cuestionario sumativo</h2>
+    <div class="gate-note" data-gate>🔒 Inicia sesión en la Portada para subir tu evidencia individual.</div>
     <p>Se entrega en la siguiente sesión.</p>
 
     <div class="entrega-box">
@@ -741,7 +778,7 @@
         <li><b>Solución de los ejercicios</b> — el desarrollo completo del cuestionario sumativo.</li>
       </ol>
 
-      <p><b>Nombre del archivo</b> (obligatorio, respeta el orden):</p>
+      <p><b>Así se guardará tu archivo</b> (la página lo nombra sola con tus datos):</p>
       <p class="nombre-code">[Abreviatura]_[ApellidoPaterno][Nombre]_[Grupo].pdf</p>
 
       <table class="nombrado">
@@ -749,7 +786,7 @@
         <tr><td>Lectura</td><td><code>LEC</code></td><td><code>LEC_HernandezJuan_501.pdf</code></td></tr>
         <tr><td>Ejercicios</td><td><code>EJE</code></td><td><code>EJE_HernandezJuan_501.pdf</code></td></tr>
       </table>
-      <p style="font-size:.82rem;">Sin espacios, sin acentos, sin "Trabajo final" ni nombres genéricos. Un archivo mal nombrado se considera no entregado.</p>
+      <p style="font-size:.82rem;">No te preocupes por cómo se llama tu archivo: la página lo renombra y lo manda a la carpeta de tu maestra. Solo asegúrate de que sea un único PDF.</p>
 
       <p><b>Antes de subir, revisa que tu solución de ejercicios incluya:</b></p>
       <ul class="checklist">
@@ -826,7 +863,7 @@
 <div id="saveStatusBar">
   <span id="saveStatusText">Tus respuestas se guardan automáticamente en este dispositivo.</span>
   <span style="display:flex; gap:.5rem; flex-wrap:wrap;">
-    <button type="button" id="btnSendTeacher">Enviar a la maestra</button>
+    <button type="button" id="btnLogout" style="display:none;">Cerrar sesión</button>
     <button type="button" id="btnPrint">Imprimir / Exportar</button>
   </span>
 </div>
@@ -874,6 +911,7 @@
     const b = document.createElement('button');
     b.className = 'navbtn' + (i===0 ? ' active' : '');
     b.textContent = label;
+    b.dataset.idx = i;
     b.onclick = () => { showSection(i); closeDropdowns(); };
     parent.appendChild(b);
     return b;
@@ -894,9 +932,13 @@
   function closeDropdowns(){ document.querySelectorAll('.dropdown.open').forEach(d=>d.classList.remove('open')); }
   document.addEventListener('click', closeDropdowns);
 
-  groups.top.forEach(i => addBtn(tabs, i, sections[i].dataset.title));
-  addDropdown('Temas', groups.temas);
-  addDropdown('Evaluación', groups.eval);
+  // Orden: Portada · Diagnóstico · Repaso · Temas ▾ · Cierre · Evaluación ▾ · Recursos
+  groups.top.forEach(i => {
+    const t = sections[i].dataset.title;
+    if(t === 'Cierre · Reto exprés') addDropdown('Temas', groups.temas);
+    if(t === 'Recursos') addDropdown('Evaluación', groups.eval);
+    addBtn(tabs, i, t);
+  });
 
   sections[0].classList.add('active');
   const allBtns = () => [...tabs.querySelectorAll('.navbtn')];
@@ -906,8 +948,8 @@
     allBtns().forEach(b => b.classList.remove('active'));
     // reflect active in top-level buttons only when the section belongs there
     if(sections[i].dataset.nav === 'top'){
-      const pos = groups.top.indexOf(i);
-      if(pos>-1) tabs.children[pos].classList.add('active');
+      const btn = [...tabs.children].find(c => c.dataset && c.dataset.idx === String(i));
+      if(btn) btn.classList.add('active');
     }
     window.scrollTo({top:0, behavior:'smooth'});
   }
@@ -931,7 +973,7 @@
   function buildQuiz(containerId, questions){
     const wrap = document.getElementById(containerId);
     if(!wrap) return;
-    questions.forEach(q => {
+    questions.forEach((q, qi) => {
       const box = document.createElement('div');
       box.className = 'quiz-item';
       const stem = document.createElement('p');
@@ -946,6 +988,7 @@
         const b = document.createElement('button');
         b.className = 'opt'; b.type = 'button'; b.textContent = optText;
         b.onclick = () => {
+          if(window.__onQuizAnswer) window.__onQuizAnswer(containerId, qi, q, oi);
           [...optsWrap.children].forEach(c => c.classList.remove('correct','incorrect'));
           fbRow.style.display = 'flex';
           if(oi === q.correct){
@@ -994,49 +1037,161 @@
     { stem:"Comprueba: ¿el triángulo de lados 6, 8 y 10 forma un ángulo recto?", opts:["Sí, porque 6²+8²=10²","No, porque 6+8≠10","No se puede saber sin transportador"], correct:0, fb:"6²+8²=36+64=100=10² — sí forma un ángulo recto." }
   ]);
 
-  /* ================= RESPUESTAS Y ENTREGAS (un solo backend: Sheets + Apps Script) ================= */
-  /* CONFIGURA AQUÍ la URL de tu Google Apps Script Web App (la misma para
-     respuestas de evaluación y para las entregas de PDF). Deja "" para desactivar el envío. */
+  /* ================= SESIÓN Y ENVÍOS (Google Sheets + Apps Script) ================= */
   var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbevFssD9KHBzMorWv_3wcXtLYeTpiEdIBIAIvQq-JuYNVXoThhLSVuwqjNS3hJpYnbg/exec";
 
   (function(){
     var STORAGE_KEY = 'progresion2_geometria_respuestas';
+    var SESSION_KEY = 'progresion2_sesion';
     var MAX_PDF_MB = 5;
 
-    function loadData(){
-      try{
-        var raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : {nombre:'', grupo:'', respuestas:{}};
-      }catch(e){ return {nombre:'', grupo:'', respuestas:{}}; }
+    function $(id){ return document.getElementById(id); }
+    function hoyLocal(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+    function limpio(t){ return String(t||'').trim().replace(/\s+/g,'').replace(/[^A-Za-z0-9ÁÉÍÓÚÑáéíóúñ]/g,''); }
+
+    var data = (function(){
+      try{ var d = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+           if(d && d.respuestas){ d.diag = d.diag || {}; d.owner = d.owner || ''; return d; } }catch(e){}
+      return {owner:'', respuestas:{}, diag:{}};
+    })();
+    var sesion = (function(){ try{ return JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null'); }catch(e){ return null; } })();
+
+    function saveData(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }catch(e){} }
+    function saveSesion(){ try{ sessionStorage.setItem(SESSION_KEY, JSON.stringify(sesion)); }catch(e){} }
+    function setStatus(msg){ var el=$('saveStatusText'); if(el) el.textContent = msg; }
+
+    function api(payload){
+      if(!APPS_SCRIPT_URL) return Promise.reject(new Error('sin-url'));
+      return fetch(APPS_SCRIPT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload)})
+        .then(function(r){ return r.json(); });
     }
-    function saveData(data){
-      try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }catch(e){}
+    function conCred(p){
+      return Object.assign({}, sesion ? {grupo:sesion.grupo, lista:sesion.lista, pin:sesion.pin} : {}, p);
     }
 
-    var data = loadData();
+    /* ---------- pantalla según sesión ---------- */
+    function fillCompaneros(){
+      var sel = $('coevSel'); if(!sel) return;
+      sel.innerHTML = '<option value="">— Elige a tu compañero(a) —</option>';
+      if(sesion && sesion.companeros){
+        sesion.companeros.forEach(function(c){
+          var o = document.createElement('option'); o.value = c.lista; o.textContent = c.nombre; sel.appendChild(o);
+        });
+      }
+      var note = $('coevNote');
+      if(note) note.textContent = (sesion && (!sesion.companeros || !sesion.companeros.length)) ? 'Tu equipo aún no tiene compañeros registrados. Avisa a tu maestra.' : '';
+    }
+    function renderSesion(){
+      var on = !!sesion;
+      $('loginBox').style.display = on ? 'none' : 'block';
+      $('sessNombre').textContent = on ? sesion.nombre : '—';
+      $('sessGrupo').textContent = on ? sesion.grupo : '—';
+      $('sessEquipo').textContent = on ? (sesion.equipo ? 'Equipo ' + sesion.equipo : 'Sin equipo') : '—';
+      $('btnLogout').style.display = on ? 'inline-block' : 'none';
+      document.querySelectorAll('[data-gate]').forEach(function(g){ g.style.display = on ? 'none' : 'block'; });
+      setStatus(on ? 'Sesión: ' + sesion.nombre + ' · ' + sesion.grupo : 'Inicia sesión en la Portada para que se registren tus respuestas.');
+      fillCompaneros();
+    }
 
+    function doLogin(){
+      var g = $('loginGrupo').value.trim(), l = $('loginLista').value.trim(), p = $('loginPin').value.trim(), msg = $('loginMsg');
+      if(!g || !l || !p){ msg.textContent = 'Escribe tu grupo, número de lista y PIN.'; return; }
+      $('btnLogin').disabled = true; msg.textContent = 'Verificando...';
+      api({accion:'login', grupo:g, lista:l, pin:p}).then(function(res){
+        $('btnLogin').disabled = false;
+        if(!(res && res.ok)){ msg.textContent = (res && res.error) || 'No se pudo entrar.'; return; }
+        sesion = {grupo:res.grupo, lista:res.lista, pin:p, nombre:res.nombre, equipo:res.equipo, lider:res.lider, companeros:res.companeros || []};
+        saveSesion();
+        var owner = res.grupo + '|' + res.lista;
+        if(data.owner && data.owner !== owner){ data = {owner:owner, respuestas:{}, diag:{}}; saveData(); location.reload(); return; }
+        data.owner = owner; saveData();
+        $('loginPin').value = ''; msg.textContent = '';
+        renderSesion();
+      }).catch(function(){
+        $('btnLogin').disabled = false;
+        msg.textContent = 'No hay conexión con el servidor. Intenta de nuevo en unos segundos.';
+      });
+    }
+    function doLogout(){
+      if(!confirm('Antes de salir, asegúrate de haber enviado tus respuestas: al cerrar sesión se borran de este dispositivo. ¿Cerrar sesión?')) return;
+      try{ sessionStorage.removeItem(SESSION_KEY); localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    }
+
+    /* ---------- registro local ---------- */
     function restore(){
-      var nameEl = document.getElementById('studentName');
-      var groupEl = document.getElementById('studentGroup');
-      if(nameEl) nameEl.value = data.nombre || '';
-      if(groupEl) groupEl.value = data.grupo || '';
       document.querySelectorAll('input.opt-radio').forEach(function(r){
         var rowId = r.getAttribute('data-row');
-        if(data.respuestas[rowId] !== undefined && data.respuestas[rowId] === r.value){
-          r.checked = true;
+        if(rowId.indexOf('q_5_') === 0) return;
+        if(data.respuestas[rowId] !== undefined && data.respuestas[rowId] === r.value) r.checked = true;
+      });
+    }
+    window.__onQuizAnswer = function(cid, qi, q, oi){
+      if(cid !== 'quiz') return;
+      var d = data.diag[qi];
+      if(!d){ d = data.diag[qi] = {n:qi+1, pregunta:q.stem, correcta:q.opts[q.correct], respuesta:q.opts[oi], acierto1:(oi === q.correct), intentos:0}; }
+      d.intentos++;
+      saveData();
+    };
+    function radiosChecked(prefix){
+      var out = [];
+      document.querySelectorAll('input.opt-radio:checked').forEach(function(r){
+        var row = r.getAttribute('data-row');
+        if(row.indexOf(prefix) === 0){
+          var td = r.closest('tr') ? r.closest('tr').querySelector('td') : null;
+          out.push({row:row, pregunta: td ? td.textContent.trim() : row, respuesta:r.getAttribute('data-optlabel'), valor: 4 - parseInt(r.value, 10)});
         }
+      });
+      out.sort(function(a,b){ return a.row < b.row ? -1 : 1; });
+      return out;
+    }
+
+    /* ---------- envíos ---------- */
+    function enviar(btn, st, payload, okMsg){
+      st.textContent = 'Enviando...'; btn.disabled = true;
+      return api(conCred(payload)).then(function(res){
+        btn.disabled = false;
+        if(res && res.ok){ st.textContent = okMsg(res) + ' — ' + new Date().toLocaleTimeString(); }
+        else { st.textContent = 'No se pudo guardar: ' + ((res && res.error) || 'error desconocido'); }
+        return res;
+      }).catch(function(){
+        btn.disabled = false;
+        st.textContent = 'No se pudo confirmar el envío. Espera unos segundos e intenta de nuevo.';
       });
     }
 
-    function setStatus(msg){
-      var el = document.getElementById('saveStatusText');
-      if(el) el.textContent = msg;
-    }
-
-    function nombreSugerido(tipo, nombre, grupo){
-      var limpio = (nombre || '').trim().replace(/\s+/g, '').replace(/[^A-Za-zÁÉÍÓÚÑáéíóúñ]/g, '');
-      var g = (grupo || '').trim().replace(/\s+/g, '');
-      return tipo + '_' + (limpio || 'ApellidoNombre') + '_' + (g || 'Grupo') + '.pdf';
+    function wireSend(btn){
+      var tipo = btn.getAttribute('data-send');
+      var st = document.querySelector('[data-status="' + tipo + '"]');
+      btn.addEventListener('click', function(){
+        if(!sesion){ st.textContent = 'Primero inicia sesión en la Portada.'; return; }
+        if(tipo === 'diagnostico'){
+          var items = Object.keys(data.diag).map(function(k){ return data.diag[k]; }).sort(function(a,b){ return a.n - b.n; });
+          if(!items.length){ st.textContent = 'Contesta al menos una pregunta primero.'; return; }
+          enviar(btn, st, {accion:'diagnostico', items:items}, function(){ return 'Diagnóstico enviado ✓'; });
+        } else if(tipo === 'semaforo'){
+          var det = radiosChecked('q_1_');
+          if(det.length < 3){ st.textContent = 'Marca los tres bloques del semáforo.'; return; }
+          enviar(btn, st, {accion:'semaforo', detalle:det.map(function(d){ return {pregunta:d.pregunta, respuesta:d.respuesta}; })}, function(){ return 'Semáforo enviado ✓'; });
+        } else if(tipo === 'autoevaluacion'){
+          var a = radiosChecked('q_4_');
+          if(a.length < 3){ st.textContent = 'Contesta los 3 indicadores.'; return; }
+          enviar(btn, st, {accion:'autoevaluacion', valores:a.map(function(d){ return d.valor; })},
+            function(res){ return 'Enviada ✓ Tu nivel de dominio: ' + res.nivel + ' (' + res.promedio.toFixed(1) + ')'; });
+        } else if(tipo === 'coevaluacion'){
+          var sel = $('coevSel');
+          if(!sel.value){ st.textContent = 'Elige a quién evalúas.'; return; }
+          var c = radiosChecked('q_5_');
+          if(c.length < 3){ st.textContent = 'Contesta los 3 indicadores.'; return; }
+          enviar(btn, st, {accion:'coevaluacion', evaluado:sel.value, valores:c.map(function(d){ return d.valor; })},
+            function(res){ return 'Coevaluación de ' + res.evaluado + ' enviada ✓'; }).then(function(res){
+              if(res && res.ok){
+                document.querySelectorAll('input.opt-radio').forEach(function(r){ if(r.getAttribute('data-row').indexOf('q_5_') === 0) r.checked = false; });
+                sel.value = '';
+              }
+            });
+        }
+      });
     }
 
     function wireUploadBlock(block){
@@ -1044,140 +1199,61 @@
       var input = block.querySelector('.upload-input');
       var btn = block.querySelector('.upload-btn');
       var status = block.querySelector('.upload-status');
-
       btn.addEventListener('click', function(){
-        var nameEl = document.getElementById('studentName');
-        var groupEl = document.getElementById('studentGroup');
-        var nombre = nameEl ? nameEl.value.trim() : '';
-        var grupo = groupEl ? groupEl.value.trim() : '';
-
-        if(!nombre || !grupo){
-          status.textContent = 'Escribe tu nombre y grupo en la portada antes de subir tu evidencia.';
-          return;
-        }
+        if(!sesion){ status.textContent = 'Primero inicia sesión en la Portada.'; return; }
         var file = input.files && input.files[0];
-        if(!file){
-          status.textContent = 'Selecciona tu archivo PDF primero.';
-          return;
-        }
-        if(file.type !== 'application/pdf'){
-          status.textContent = 'El archivo debe ser PDF (no Word, no imagen suelta).';
-          return;
-        }
-        if(file.size > MAX_PDF_MB * 1024 * 1024){
-          status.textContent = 'Tu archivo pesa más de ' + MAX_PDF_MB + ' MB. Comprímelo o reduce imágenes antes de subirlo.';
-          return;
-        }
-        if(!APPS_SCRIPT_URL){
-          status.textContent = 'La entrega en línea aún no está activada. Pregunta a tu maestra cómo entregar mientras tanto.';
-          return;
-        }
-
-        var nombreArchivo = nombreSugerido(tipo, nombre, grupo);
-        btn.disabled = true;
-        status.textContent = 'Subiendo ' + file.name + '...';
-
+        if(!file){ status.textContent = 'Selecciona tu archivo PDF primero.'; return; }
+        if(file.type !== 'application/pdf'){ status.textContent = 'El archivo debe ser PDF (no Word, no imagen suelta).'; return; }
+        if(file.size > MAX_PDF_MB * 1024 * 1024){ status.textContent = 'Tu archivo pesa más de ' + MAX_PDF_MB + ' MB. Comprímelo antes de subirlo.'; return; }
+        btn.disabled = true; status.textContent = 'Subiendo ' + file.name + '...';
         var reader = new FileReader();
         reader.onload = function(){
           var base64 = String(reader.result).split(',')[1];
-          var payload = {
-            accion: 'entrega',
-            tipo: tipo,
-            nombre: nombre,
-            grupo: grupo,
-            progresion: 'Progresión 2 · Geometría euclidiana',
-            fecha: new Date().toISOString(),
-            nombreArchivo: nombreArchivo,
-            mimeType: file.type,
-            contenidoBase64: base64
-          };
-          fetch(APPS_SCRIPT_URL, {
-            method: 'POST',
-            headers: {'Content-Type':'text/plain;charset=utf-8'},
-            body: JSON.stringify(payload)
-          }).then(function(r){ return r.json(); }).then(function(res){
-            if(res && res.ok){
-              status.textContent = 'Entrega confirmada ✓ ' + nombreArchivo + ' — ' + new Date().toLocaleTimeString();
-            } else {
-              status.textContent = 'El servidor rechazó el archivo: ' + ((res && res.error) || 'error desconocido') + '. Intenta de nuevo.';
-            }
+          api(conCred({accion:'entrega', tipo:tipo, contenidoBase64:base64})).then(function(res){
             btn.disabled = false;
+            status.textContent = (res && res.ok) ? 'Entrega confirmada ✓ ' + res.archivo + ' — ' + new Date().toLocaleTimeString()
+                                                 : 'No se pudo guardar: ' + ((res && res.error) || 'error desconocido');
           }).catch(function(){
-            status.textContent = 'No se pudo confirmar la entrega. Espera unos segundos y vuelve a intentar; si sigue igual, avisa a tu maestra.';
             btn.disabled = false;
+            status.textContent = 'No se pudo confirmar la entrega. Espera unos segundos e intenta de nuevo; si sigue igual, avisa a tu maestra.';
           });
         };
-        reader.onerror = function(){
-          status.textContent = 'No se pudo leer el archivo. Intenta de nuevo.';
-          btn.disabled = false;
-        };
+        reader.onerror = function(){ btn.disabled = false; status.textContent = 'No se pudo leer el archivo. Intenta de nuevo.'; };
         reader.readAsDataURL(file);
       });
     }
 
-    document.addEventListener('DOMContentLoaded', function(){
-      restore();
+    /* ---------- impresión / exportar: nombre del alumno en el archivo y en cada hoja ---------- */
+    var tituloOriginal = document.title;
+    window.addEventListener('beforeprint', function(){
+      if(sesion) document.title = 'Cuadernillo_P2_' + limpio(sesion.nombre) + '_' + limpio(sesion.grupo);
+      var ph = $('printHeader');
+      if(ph) ph.textContent = (sesion ? sesion.nombre + ' · Grupo ' + sesion.grupo + (sesion.equipo ? ' · Equipo ' + sesion.equipo : '') + ' · ' : '') + 'Fecha: ' + ($('studentDate').value || hoyLocal());
+    });
+    window.addEventListener('afterprint', function(){ document.title = tituloOriginal; });
 
-      var nameEl = document.getElementById('studentName');
-      var groupEl = document.getElementById('studentGroup');
-      if(nameEl) nameEl.addEventListener('input', function(){ data.nombre = nameEl.value; saveData(data); });
-      if(groupEl) groupEl.addEventListener('input', function(){ data.grupo = groupEl.value; saveData(data); });
+    /* ---------- arranque ---------- */
+    document.addEventListener('DOMContentLoaded', function(){
+      $('studentDate').value = hoyLocal();
+      restore();
+      renderSesion();
 
       document.querySelectorAll('input.opt-radio').forEach(function(r){
         r.addEventListener('change', function(){
           var rowId = r.getAttribute('data-row');
+          if(rowId.indexOf('q_5_') === 0) return;
           data.respuestas[rowId] = r.value;
-          saveData(data);
-          setStatus('Guardado ✓ ' + new Date().toLocaleTimeString());
+          saveData();
         });
       });
-
+      $('btnLogin').addEventListener('click', doLogin);
+      ['loginGrupo','loginLista','loginPin'].forEach(function(id){
+        $(id).addEventListener('keydown', function(e){ if(e.key === 'Enter') doLogin(); });
+      });
+      $('btnLogout').addEventListener('click', doLogout);
+      $('btnPrint').addEventListener('click', function(){ window.print(); });
+      document.querySelectorAll('[data-send]').forEach(wireSend);
       document.querySelectorAll('.upload-block').forEach(wireUploadBlock);
-
-      var btnPrint = document.getElementById('btnPrint');
-      if(btnPrint) btnPrint.addEventListener('click', function(){ window.print(); });
-
-      var btnSend = document.getElementById('btnSendTeacher');
-      if(btnSend) btnSend.addEventListener('click', function(){
-        if(!APPS_SCRIPT_URL){
-          alert('El envío a la maestra aún no está activado en este cuadernillo. Puedes usar "Imprimir / Exportar" para entregar tus respuestas.');
-          return;
-        }
-        if(!data.nombre){
-          alert('Escribe tu nombre en la portada antes de enviar tus respuestas.');
-          return;
-        }
-        // construir lista legible de respuestas con sus etiquetas
-        var detalle = [];
-        document.querySelectorAll('input.opt-radio:checked').forEach(function(r){
-          var rowId = r.getAttribute('data-row');
-          var label = r.getAttribute('data-optlabel');
-          var rowLabelCell = r.closest('tr') ? r.closest('tr').querySelector('td') : null;
-          detalle.push({
-            pregunta: rowLabelCell ? rowLabelCell.textContent.trim() : rowId,
-            respuesta: label
-          });
-        });
-        var payload = {
-          accion: 'respuestas',
-          nombre: data.nombre,
-          grupo: data.grupo,
-          progresion: 'Progresión 2 · Geometría euclidiana',
-          fecha: new Date().toISOString(),
-          detalle: detalle
-        };
-        setStatus('Enviando...');
-        fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          headers: {'Content-Type':'text/plain;charset=utf-8'},
-          body: JSON.stringify(payload)
-        }).then(function(r){ return r.json(); }).then(function(res){
-          if(res && res.ok){ setStatus('Enviado a la maestra ✓ ' + new Date().toLocaleTimeString()); }
-          else { setStatus('El servidor no aceptó el envío. Intenta de nuevo.'); }
-        }).catch(function(){
-          setStatus('No se pudo confirmar el envío. Intenta de nuevo en unos segundos.');
-        });
-      });
     });
   })();
 
